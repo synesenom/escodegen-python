@@ -1354,7 +1354,7 @@ class CodeGeneratorStatement:
             ])
             cursor += 1
             
-        if stmt.specifiers[cursor]:
+        if len(stmt.specifiers) > 1 and stmt.specifiers[cursor]:
             if cursor != 0:
                 result.append(',')
 
