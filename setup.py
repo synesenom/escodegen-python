@@ -4,7 +4,7 @@ from shutil import rmtree
 from setuptools import setup, find_packages
 
 setup(name='escodegen',
-      version='0.0.1',
+      version='1.0.12',
       description='ECMA Script generation from esprima AST.',
       url='https://github.com/synesenom/escodegen-python',
       author='Enys Mones',
