@@ -1353,8 +1353,10 @@ class CodeGeneratorStatement:
                 self.generateExpression(stmt.specifiers[cursor], Precedence.Sequence, E_TTT)
             ])
             cursor += 1
-            
-        if len(stmt.specifiers) > 1 and stmt.specifiers[cursor]:
+
+        # Check the length to avoid IndexError. This will fix the bug with statements like:
+        # import foo from "foo.js".
+        if len(stmt.specifiers) > cursor and stmt.specifiers[cursor]:
             if cursor != 0:
                 result.append(',')
 
@@ -2174,10 +2176,10 @@ class CodeGeneratorExpression:
     
     def Identifier(self, expr, precedence, flags):
         return generateIdentifier(expr)
-    
+
     def ImportDefaultSpecifier(self, expr, precedence, flags):
         return generateIdentifier(expr.id or expr.local)
-    
+
     def ImportNamespaceSpecifier(self, expr, precedence, flags):
         result = ['*']
         _id = expr.id or expr.local
